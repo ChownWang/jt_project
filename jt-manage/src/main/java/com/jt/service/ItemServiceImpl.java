@@ -1,12 +1,9 @@
 package com.jt.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jt.mapper.ItemDescMapper;
 import com.jt.pojo.Item;
-import com.jt.pojo.ItemDesc;
 import com.jt.vo.EasyUITable;
 import com.jt.vo.SysResult;
 import org.springframework.stereotype.Service;
@@ -16,16 +13,16 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {
+	
 	@Resource
 	private ItemMapper itemMapper;
-	@Resource
-	private ItemDescMapper itemDescMapper;
+
+
 
 	/**
 	 *
@@ -51,51 +48,10 @@ public class ItemServiceImpl implements ItemService {
 
 	@Transactional
 	@Override
-	public void saveItem(Item item,ItemDesc itemDesc) {
+	public void saveItem(Item item) {
 		item.setStatus(1);
 		item.setUpdated(new Date());
 		item.setCreated(new Date());
 		itemMapper.insert(item);
-		itemDesc.setItemId(item.getId())
-				.setUpdated(item.getUpdated())
-				.setCreated(item.getCreated());
-		itemDescMapper.insert(itemDesc);
-	}
-
-	@Override
-	public SysResult queryItemDesc(Long itemId) {
-		ItemDesc itemDesc = itemDescMapper.selectById(itemId);
-		return SysResult.success(itemDesc);
-	}
-
-	@Override
-	public SysResult updateItem(Item item,ItemDesc itemDesc) {
-		item.setUpdated(new Date());
-		itemMapper.updateById(item);
-		itemDesc.setItemId(item.getId())
-				.setUpdated(new Date());
-		itemDescMapper.updateById(itemDesc);
-		return SysResult.success();
-	}
-
-	@Override
-	public SysResult deleteItemByIds(List<Long> ids) {
-		itemMapper.deleteBatchIds(ids);
-		itemDescMapper.deleteBatchIds(ids);
-		return SysResult.success();
-	}
-
-	@Override
-	public SysResult instockOrReshelf(String itemStatus,List<Long> ids) {
-		/**reshelf表示商品上架*/
-		UpdateWrapper<Item> updateWrapper = new UpdateWrapper<>();
-		updateWrapper.in("id",ids);
-		if ("reshelf".equals(itemStatus)){
-			updateWrapper.set("status",1);
-		}else {
-			updateWrapper.set("status",2);
-		}
-		itemMapper.update(null,updateWrapper);
-		return SysResult.success();
 	}
 }
