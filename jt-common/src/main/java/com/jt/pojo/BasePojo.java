@@ -13,6 +13,4 @@ import lombok.experimental.Accessors;
 public class BasePojo implements Serializable{
 	private Date created;
 	private Date updated;
-
-
 }
