@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * @ClassName ItemDesc
  * @Description TODO
@@ -19,7 +21,8 @@ import lombok.experimental.Accessors;
 @TableName("tb_item_desc")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDesc extends BasePojo{
+public class ItemDesc extends BasePojo implements Serializable {
+    private static final long serialVersionUID = -1674211217799168752L;
     @TableId
     private Long itemId;
     private String itemDesc;

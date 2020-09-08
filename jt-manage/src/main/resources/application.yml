@@ -6,7 +6,8 @@ spring:
   datasource:
     #引入druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://192.168.126.129:8066/jtdb?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
     url: jdbc:mysql://localhost:3306/jtdb?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
     username: root
     password: 123456
@@ -25,3 +26,13 @@ mybatis-plus:
 logging:
   level: 
     com.jt.mapper: debug
+dubbo:
+  scan:
+    basePackages: com.jt    #指定dubbo的包路径
+  application:              #应用名称
+    name: provider-item     #一个接口对应一个服务名称
+  registry:
+    address: zookeeper://192.168.126.129:2181?backup=192.168.126.129:2182,192.168.126.129:2183
+  protocol:  #指定协议
+    name: dubbo  #使用dubbo协议(tcp-ip)
+    port: 20881  #每一个服务都有自己特定的端口 不能重复.

@@ -7,11 +7,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 @JsonIgnoreProperties(ignoreUnknown=true) //表示JSON转化时忽略未知属性
 @TableName("tb_item")
 @Data
 @Accessors(chain=true)
-public class Item extends BasePojo{
+public class Item extends BasePojo implements Serializable {
+
+	private static final long serialVersionUID = -81838522792316582L;
 	@TableId(type=IdType.AUTO)
 	private Long id;				//商品id
 	private String title;			//商品标题

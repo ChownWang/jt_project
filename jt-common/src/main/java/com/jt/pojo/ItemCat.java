@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * @ClassName ItemCat
  * @Description TODO
@@ -18,8 +20,9 @@ import lombok.experimental.Accessors;
 @Data
 @TableName(value="tb_item_cat")
 @Accessors(chain = true)
-public class ItemCat {
+public class ItemCat implements Serializable {
 
+    private static final long serialVersionUID = -403671303558127769L;
     /**
      * id : 560
      * parentId : 父级ID

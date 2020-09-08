@@ -12,6 +12,9 @@
         <module>jt-common</module>
         <module>jt-manage</module>
         <module>jt-order</module>
+        <module>jt-web</module>
+        <module>jt-sso</module>
+        <module>jt-cart</module>
     </modules>
     <!--parent标签作用:管理所有被springBoot整合之后的jar包的版本定义 springBoot特点: 开箱即用 引入jar包就可以添加相对应的功能.
             定义了当前springBoot2.3.1所有的相关依赖的版本号信息. -->
@@ -19,7 +22,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.2.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
@@ -115,7 +118,7 @@
         </dependency>
 
         <!--spring整合redis -->
-       <!-- <dependency>
+        <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
@@ -123,25 +126,24 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
         </dependency>
+                <!--添加httpClient jar包 -->
+                <dependency>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </dependency>
 
-        &lt;!&ndash;添加httpClient jar包 &ndash;&gt;
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-
-        &lt;!&ndash;引入dubbo配置 &ndash;&gt;
+                <!--引入dubbo配置-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
             <version>0.2.0</version>
-        </dependency>-->
+        </dependency>
 
         <!--添加Quartz的支持 -->
-        <!-- <dependency>
+         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
-        </dependency>	-->
+        </dependency>
 
     </dependencies>
 

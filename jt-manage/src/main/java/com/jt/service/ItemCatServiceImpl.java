@@ -1,6 +1,7 @@
 package com.jt.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jt.anno.CacheFind;
 import com.jt.mapper.ItemCatMapper;
 import com.jt.pojo.ItemCat;
 import com.jt.vo.EasyUITree;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @ClassName ItemCatServiceImpl
@@ -22,6 +24,7 @@ public class ItemCatServiceImpl implements ItemCatService {
     @Resource
     private ItemCatMapper itemCatMapper;
 
+    @CacheFind(key = "ITEM_CAT_ID")
     @Override
     public String queryItemName(Long id) {
        ItemCat itemCat =  itemCatMapper.selectById(id);
@@ -29,6 +32,7 @@ public class ItemCatServiceImpl implements ItemCatService {
        return name;
     }
 
+    @CacheFind(key = "ITEM_CAT_LIST")
     @Override
     public List<EasyUITree> findItemCatByParentId(Long parentId) {
         QueryWrapper<ItemCat> queryWrapper = new QueryWrapper<>();
